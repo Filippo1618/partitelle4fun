@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+    <title>Aggiornamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/styles_giocatori.css" rel="stylesheet" />
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container-full-width">
+                <a class="navbar-brand" href="http://127.0.0.1:8000/partitelle/">Calcettata mai mollata</a>
+                <button class="navbar-toggler  ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-right: 5%;">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/partitelle/giocatori/">Giocatori</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Statistiche</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/partitelle/registrati/">Registrati</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Accedi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section style="padding-top:5rem;">
+            <div class="w3-container">
+            <h2>Aggiornamento dati</h2>
+            
+            <div class="w3-card-4">
+                <div class="w3-container w3-green">
+                <h2>Tessera Giocatore </h2>
+                </div>
+
+                <form class="w3-container " method="post" action="updateData/">
+                    {% csrf_token %}
+                    <p>
+                        <input class="w3-input w3-border w3-round-large" type="text" name="nome" value="{{giocatore.nome}}">
+                        <label>Nome</label></p>
+                    <p>     
+
+                    <input class="w3-input w3-border w3-round-large" type="text" name="descrizione">
+                    <label>Descrizione</label></p>
+                    
+                    <input class="w3-check" type="checkbox" name="portiere">
+                    <label>Portiere</label>
+
+                    <input class="w3-check" type="checkbox" name="difensore">
+                    <label>Difensore centrale</label>
+
+                    <input class="w3-check" type="checkbox" name="ala_destra">
+                    <label>Ala destra</label>
+                    
+                    <input class="w3-check" type="checkbox" name="ala_sinistra">
+                    <label>Ala sinistra</label>
+
+                    <input class="w3-check" type="checkbox" name="punta">
+                    <label>Punta</label>
+
+                    <input class="w3-button w3-green w3-round-xlarge" type="submit" value="update">
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
+
+
+<!-- 
+<h1>Registrati come giocatore</h1>
+
+<form method="post" action="createData/">
+    {% csrf_token %}
+    Nome: <input name="nome">
+    Ruolo: <input name="ruolo"> 
+    <input type="submit" value="registra">
+</form>
+-->
