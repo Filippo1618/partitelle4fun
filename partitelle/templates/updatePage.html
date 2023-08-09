@@ -1,12 +1,6 @@
 
-<!DOCTYPE html>
-<html>
-    <title>Aggiornamento</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link href="/static/css/styles.css" rel="stylesheet" />
-    <link href="/static/css/styles_giocatori.css" rel="stylesheet" />
+{% include 'head_w3_bs.html' %}
+<title>Aggiornamento</title>
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -32,29 +26,29 @@
                 <h2>Tessera Giocatore </h2>
                 </div>
 
-                <form class="w3-container " method="post" action="updateData/">
+                <form class="w3-container " method="post" action="../updateData/{{giocatore.id}}">
                     {% csrf_token %}
                     <p>
                         <input class="w3-input w3-border w3-round-large" type="text" name="nome" value="{{giocatore.nome}}">
                         <label>Nome</label></p>
                     <p>     
-
-                    <input class="w3-input w3-border w3-round-large" type="text" name="descrizione">
-                    <label>Descrizione</label></p>
-                    
-                    <input class="w3-check" type="checkbox" name="portiere">
+                    <p>
+                    <input class="w3-input w3-border w3-round-large" type="text" name="descrizione" value="{{giocatore.descrizione}}">
+                    <label>Descrizione</label>
+                    </p>
+                    <input class="w3-check" type="checkbox" name="portiere" {% if giocatore.portiere %}checked{% endif %}>
                     <label>Portiere</label>
 
-                    <input class="w3-check" type="checkbox" name="difensore">
+                    <input class="w3-check" type="checkbox" name="difensore" {% if giocatore.difensore %}checked{% endif %}>
                     <label>Difensore centrale</label>
 
-                    <input class="w3-check" type="checkbox" name="ala_destra">
+                    <input class="w3-check" type="checkbox" name="ala_destra" {% if giocatore.ala_destra %}checked{% endif %}>
                     <label>Ala destra</label>
                     
-                    <input class="w3-check" type="checkbox" name="ala_sinistra">
+                    <input class="w3-check" type="checkbox" name="ala_sinistra" {% if giocatore.ala_sinistra %}checked{% endif %}>
                     <label>Ala sinistra</label>
 
-                    <input class="w3-check" type="checkbox" name="punta">
+                    <input class="w3-check" type="checkbox" name="punta" {% if giocatore.punta %}checked{% endif %}>
                     <label>Punta</label>
 
                     <input class="w3-button w3-green w3-round-xlarge" type="submit" value="update">
