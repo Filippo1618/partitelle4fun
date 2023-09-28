@@ -1,0 +1,74 @@
+{% extends "main.html" %} {% block content %}
+<section style="padding-top: 5rem">
+  <div
+    class="container-full-width d-flex flex-wrap justify-content-md-between justify-content-center m-2"
+    style="box-sizing: border-box"
+  >
+    {% for x in giocatori %}
+
+    <div
+      id="custom-flip-card"
+      class="flip-card m-2 col-md-5"
+      style="width: 300px; height: 300px"
+    >
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img
+            class="img-fluid"
+            src="/static/assets/img/Lupo.jpg"
+            alt="Avatar"
+            style="width: 300px; height: 300px"
+          />
+        </div>
+        <div class="flip-card-back">
+          <h1>{{x.nome}}</h1>
+          <h5>{{x.descrizione}}</h5>
+          <h5>(foto predefinita)!!</h5>
+          <!-- devo disporre i potenziali ruoli secondo colonne variabili-->
+          <div class="row">
+            <div class="col-md-6">
+              {% if x.portiere %}
+              <p>Portiere</p>
+              {% endif %} {% if x.difensore %}
+              <p>Difensore centrale</p>
+              {% endif %}
+            </div>
+            <div class="col-md-6">
+              {% if x.ala_destra %}
+              <p>Ala destra</p>
+              {% endif %} {% if x.ala_sinistra %}
+              <p>Ala sinistra</p>
+              {% endif %} {% if x.punta %}
+              <p>Punta</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="btn-group" style="background-color: transparent">
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              type="button"
+              href="stat/{{x.id}}"
+              >stat</a
+            >
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              type="button"
+              href="update/{{x.id}}"
+              >aggiorna</a
+            >
+            <a
+              class="btn btn-danger btn-sm"
+              type="button"
+              href="cancellati/{{x.id}}"
+              >cancellati</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}

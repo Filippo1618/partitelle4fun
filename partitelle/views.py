@@ -6,11 +6,11 @@ from .models import Giocatore
 # Create your views here.
 
 def index(request):
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    template = loader.get_template('partitelle/index.html')
+    return HttpResponse(template.render({}, request))
 
 def create(request):
-    template = loader.get_template('createPage.html')
+    template = loader.get_template('partitelle/createPage.html')
     return HttpResponse(template.render({}, request))
 
 def createData(request):
@@ -36,7 +36,7 @@ def delete(request, id):
     return HttpResponseRedirect(reverse("index"))
 
 def update(request, id):
-    template = loader.get_template('updatePage.html')
+    template = loader.get_template('partitelle/updatePage.html')
     giocatore_da_aggiornare = Giocatore.objects.get(id=id)
 
     context = {
@@ -72,5 +72,5 @@ def giocatori(request):
         "giocatori": giocatori 
     }
 
-    template = loader.get_template('campioni.html')
+    template = loader.get_template('partitelle/campioni.html')
     return HttpResponse(template.render(context, request))
