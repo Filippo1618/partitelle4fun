@@ -83,6 +83,21 @@ def giocatori(request):
     template = loader.get_template('partitelle/campioni.html')
     return HttpResponse(template.render(context, request))
 
+
+# una wrapped view per impedire a chi ha fatto il log in di registrarsi senza prima fare logout
+def login_required_for_registration(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        # Verifica se l'utente è autenticato
+        if request.user.is_authenticated:
+            messages.error(request,"Devi fare il log out prima di procedere con la registrazione di un account")
+            # Utente già autenticato, reindirizza a una pagina specifica (ad esempio il profilo)
+            return redirect('profilo')  # Cambia questo percorso in base alla tua configurazione
+        else:
+            # Utente non autenticato, permetti l'accesso alla pagina di registrazione
+            return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+
 def createUser(request):
     
     template = loader.get_template('partitelle/login.html')
@@ -123,7 +138,7 @@ def createUser(request):
         new_user.save()
 
         messages.success(request,"Il tuo account è stato creato correttamente!")
-    # return redirect('studio_agronomico/index.html')
+        return HttpResponseRedirect(reverse('login'))
     return HttpResponse( template.render({}, request))
 
 
@@ -181,3 +196,17 @@ def profilo(request):
     }
 
     return HttpResponse( template.render(context ,request))
+
+
+@login_required
+def stat_page(request):
+
+    user = request.user
+
+    template = loader.get_template('partitelle/statistiche.html')
+
+    context = {
+        "user": user,
+    }
+
+    return HttpResponse(template.render(context, request))

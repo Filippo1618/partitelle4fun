@@ -29,9 +29,9 @@
     </div>
   </header>
   <div class="container m-5 ">
-    <div class="row">
-      <div class="col-md-8">
-        <h2>Informazioni utente</h2>
+    <div class="row ">
+      <div class="col-md-6 mb-3">
+        <h2>Informazioni Utente</h2>
         <p>Nome: {{ user.first_name }}</p>
         <p>Cognome: {{ user.last_name }}</p>
         <p>Email: {{ user.email }}</p>
@@ -47,10 +47,29 @@
           Disconnettiti
         </button>
       </div>
-      <div class="container mt-4 border-top">
-        <br />
+      <div class="col-md-6 mb-3">
+        <h2>Informazioni Giocatore</h2>
+        <p>Partite giocate: 0 </p>
+        <p>Partite vinte: 0 </p>
+        <p>Tasso di vittoria: 0% </p>
+        <p>Categoria: Bronzo </p>
+        <p>Punteggio: 1000 </p>
+  
+        <!-- Altre informazioni dell'utente -->
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="window.location.href='{% url 'statistiche'%}'"
+        >
+          Statistiche
+        </button>
+      </div>
+    </div>
+  
     </div>
   </div>
-</div>
+  <div class="container-full-width border-top">
+    <br />
+  </div>
 </section>
 {% endblock %}
