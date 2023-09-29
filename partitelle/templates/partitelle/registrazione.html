@@ -1,0 +1,119 @@
+{% extends "main.html" %} {% block content %}
+<section style="padding-top: 3rem">
+  <div class="container m-5">
+    <form action="createUser/" method="post">
+        {% csrf_token %}
+      <div class="row m-5">
+        <div class="col-md-4 mb-3">
+          <label for="validationDefault01">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationDefault01"
+            name="nome"
+            placeholder="necessario"
+            required
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationDefault02">Cognome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationDefault02"
+            name="cognome"
+            placeholder="necessario"
+            required
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationDefaultUsername">Username</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupPrepend2">@</span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              id="validationDefaultUsername"
+              name="username"
+              placeholder="necessario"
+              aria-describedby="inputGroupPrepend2"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div class="row m-5">
+        <div class="col-md-6 mb-3">
+            <label for="validationDefault03">Password</label>
+            <input
+            class="form-control"
+            type="password"
+            name="password1"
+            placeholder="necessario"
+            />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationDefault03">Conferma password</label>
+            <input
+            class="form-control"
+            type="password"
+            name="password2"
+            placeholder="necessario"
+            />
+        </div>
+
+      </div>
+      <div class="row m-5">
+        <div class="col-md-6 mb-3">
+          <label for="validationDefault03">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationDefault03"
+            name="email"
+            placeholder="necessario"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="validationDefault04">Città</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationDefault04"
+            nome="citta"
+            placeholder="facoltativo"
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="validationDefault05">CAP</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationDefault05"
+            nome="cap"
+            placeholder="facoltativo"
+          />
+        </div>
+      </div>
+      <div class="form-group m-5">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="invalidCheck2"
+            required
+          />
+          <label class="form-check-label" for="invalidCheck2">
+            Agree to terms and conditions
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-primary m-5" type="submit">Submit form</button>
+    </form>
+  </div>
+<section>
+{% endblock %}

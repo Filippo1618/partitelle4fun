@@ -1,0 +1,70 @@
+{% extends "main.html" %} 
+{% block content %}
+<section id="scroll">
+
+  <header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+      <div class="text-center mt-5">
+        {% if user.is_authenticated %}
+        <h1>Bentornato {{user.username}}</h1>
+        {% else %}
+        <h1 class="fw-bolder">Benvenuto nella pagina di autenticazione!</h1>
+        <p class="lead mb-0">Esegui il login per accedere al tuo profilo</p>
+        {% endif %}  
+      </div>
+    </div>
+  </header>
+
+  <div class="container m-5">
+    <div class="row">
+
+      {% for message in messages %}
+      <div class="alert alert-primary alet-dismissible fade show" role="alert">
+        <strong>Message: </strong>{{message}}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      
+      <div class="col-md-8">
+        <form action="{% url 'login_req' %}" method="post">
+          {% csrf_token %}
+          <input
+            class="form-control"
+            type="text"
+            name="username"
+            placeholder="username..."
+          /><br />
+          <input
+            class="form-control"
+            type="password"
+            name="password1"
+            placeholder="Inserisci una password..."
+          /><br />
+          <input
+            class="btn btn-primary"
+            type="submit"
+            value="Accedi"
+          /><br /><br />
+        </form>
+        {% if user.is_authenticated %}
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'logout'%}'">Disconnettiti</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'profilo'%}'">Vai al Profilo</button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

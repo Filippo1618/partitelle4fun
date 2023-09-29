@@ -1,0 +1,42 @@
+
+{% extends 'main.html' %}
+{% block content %}
+<section style="padding-top:5rem;">
+    <div class="w3-container">
+    <h2>Aggiornamento dati</h2>
+    
+    <div class="w3-card-4">
+        <div class="w3-container w3-green">
+        <h2>Tessera Giocatore </h2>
+        </div>
+
+        <form class="w3-container " method="post" action="../updateData/{{giocatore.id}}">
+            {% csrf_token %}
+            <p>
+                <input class="w3-input w3-border w3-round-large" type="text" name="nome" value="{{giocatore.nome}}">
+                <label>Nome</label></p>
+            <p>     
+            <p>
+            <input class="w3-input w3-border w3-round-large" type="text" name="descrizione" value="{{giocatore.descrizione}}">
+            <label>Descrizione</label>
+            </p>
+            <input class="w3-check" type="checkbox" name="portiere" {% if giocatore.portiere %}checked{% endif %}>
+            <label>Portiere</label>
+
+            <input class="w3-check" type="checkbox" name="difensore" {% if giocatore.difensore %}checked{% endif %}>
+            <label>Difensore centrale</label>
+
+            <input class="w3-check" type="checkbox" name="ala_destra" {% if giocatore.ala_destra %}checked{% endif %}>
+            <label>Ala destra</label>
+            
+            <input class="w3-check" type="checkbox" name="ala_sinistra" {% if giocatore.ala_sinistra %}checked{% endif %}>
+            <label>Ala sinistra</label>
+
+            <input class="w3-check" type="checkbox" name="punta" {% if giocatore.punta %}checked{% endif %}>
+            <label>Punta</label>
+
+            <input class="w3-button w3-green w3-round-xlarge" type="submit" value="update">
+        </form>
+    </div>
+</section>
+{% endblock content %}

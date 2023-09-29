@@ -1,0 +1,75 @@
+{% extends "main.html" %} {% block content %}
+<section id="scroll">
+  <header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+      <div class="text-center mt-5">
+        <h1>Profilo di {{ user.username }}</h1>
+        <p class="lead mb-0">Benvenuto nel tuo profilo</p>
+      </div>
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div
+          class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </header>
+  <div class="container m-5 ">
+    <div class="row ">
+      <div class="col-md-6 mb-3">
+        <h2>Informazioni Utente</h2>
+        <p>Nome: {{ user.first_name }}</p>
+        <p>Cognome: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Age: {{ user.userprofile.eta }}</p>
+        <p>Nickname: {{ user.userprofile.nickname }}</p>
+
+        <!-- Altre informazioni dell'utente -->
+        <button
+          type="button"
+          class="btn btn-danger"
+          onclick="window.location.href='{% url 'logout'%}'"
+        >
+          Disconnettiti
+        </button>
+      </div>
+      <div class="col-md-6 mb-3">
+        <h2>Informazioni Giocatore</h2>
+        <p>Partite giocate: 0 </p>
+        <p>Partite vinte: 0 </p>
+        <p>Tasso di vittoria: 0% </p>
+        <p>Categoria: Bronzo </p>
+        <p>Punteggio: 1000 </p>
+  
+        <!-- Altre informazioni dell'utente -->
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="window.location.href='{% url 'statistiche'%}'"
+        >
+          Statistiche
+        </button>
+      </div>
+    </div>
+  
+    </div>
+  </div>
+  <div class="container-full-width border-top">
+    <br />
+  </div>
+</section>
+{% endblock %}

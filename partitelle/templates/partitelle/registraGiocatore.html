@@ -1,0 +1,43 @@
+
+{% extends 'main.html' %}  
+{% block content %}
+<section style="padding-top:5rem;">
+    <div class="w3-container">
+    <h2>Registrazione</h2>
+    
+    <div class="w3-card-4">
+        <div class="w3-container w3-green">
+        <h2>Tessera Giocatore </h2>
+        </div>
+
+        <form class="w3-container " method="post" action="createData/">
+            {% csrf_token %}
+            <p>
+                <input class="w3-input w3-border w3-round-large" type="text" name="nome">
+                <label>Nome</label></p>
+            <p>     
+
+            <input class="w3-input w3-border w3-round-large" type="text" name="descrizione">
+            <label>Descrizione</label></p>
+            
+            <input class="w3-check" type="checkbox" name="portiere">
+            <label>Portiere</label>
+
+            <input class="w3-check" type="checkbox" name="difensore">
+            <label>Difensore centrale</label>
+
+            <input class="w3-check" type="checkbox" name="ala_destra">
+            <label>Ala destra</label>
+            
+            <input class="w3-check" type="checkbox" name="ala_sinistra">
+            <label>Ala sinistra</label>
+
+            <input class="w3-check" type="checkbox" name="punta">
+            <label>Punta</label>
+
+            <input class="w3-button w3-green w3-round-xlarge" type="submit" value="registraGiocatore">
+        </form>
+    </div>
+</section>
+
+{% endblock %}
