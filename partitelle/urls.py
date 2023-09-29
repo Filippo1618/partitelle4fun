@@ -3,11 +3,16 @@ from . import views
 
 urlpatterns =[
     path('', views.index, name='index'),
-    path('registrati/', views.create, name='registrazione'),
-    path('registrati/createData/', views.createData, name='createData'),
+    path('registraGiocatore/', views.create, name='registraGiocatore'),
+    path('registrazione/', views.registrazione, name='registrazione'),
+    path('registraGiocatore/createData/', views.createData, name='createData'),
     path('giocatori/', views.giocatori, name='giocatori'),
     path('giocatori/cancellati/<int:id>', views.delete, name='cancellati'),
     path('giocatori/update/<int:id>', views.update, name='update'),
     path('giocatori/updateData/<int:id>', views.updateData, name='updateData'),
+    path('login/', views.login_page, name='login'),
+    path('login_req/', views.login_req, name='login_req'),
+    path('logout/', views.logout_page, name='logout'),
+    path('profilo/', views.profilo, name='profilo'),
 
 ]
