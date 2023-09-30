@@ -1,0 +1,189 @@
+{% extends "main.html" %}
+{% block content %}
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<section>
+    <header class="py-5 bg-light">
+        <div class="container">
+          <div class="text-center mt-5">
+            <h1>Statistiche di {{ user.username }}</h1>
+            <p class="lead mb-0">Studia la tua resa per migliorare ogni partita</p>
+          </div>
+          {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+            <div
+              class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %} alert-dismissible fade show"
+              role="alert"
+            >
+              {{ message }}
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </header>
+</section>
+<section>
+    <div class="container text-center mt-2 mb-2">
+        <!-- Crea un elemento canvas per il grafico -->
+        <div class="row">
+                <div class="col-md-6">
+                    <canvas id="graficoStatistiche" width="400" height="400" role="graph"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="radarChart"></canvas>
+                </div>
+        </div>
+    </div>
+</section>
+<header class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1>Statistiche significative</h1>
+            <p>Goal segnati: <span id="numeroGol"></span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="container text-center mt-2 mb-2">
+        <h1>
+            Sezione primo grafico <br/>
+            Goal segnati: <span id="numeroGol"></span>
+        </h1>
+        <!-- Crea un elemento canvas per il grafico -->
+        <div class="row">
+                <div class="col-md-6">
+                    <canvas id="graficoStatistiche" width="400" height="400" role="graph"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="radarChart"></canvas>
+                </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    var statisticheGiocatore = {
+        partiteFatte: 15,
+        partiteVinte: 10,
+        golSegnati: 25
+    };
+
+    var ctx = document.getElementById('graficoStatistiche').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Partite Fatte', 'Partite Vinte', 'Gol Segnati'],
+            datasets: [{
+                label: 'Statistiche',
+                data: [statisticheGiocatore.partiteFatte, statisticheGiocatore.partiteVinte, statisticheGiocatore.golSegnati],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            var label = 'context.dataset.label' || ''; // da eliminare la prima parte per usare solo il valore
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y; // Il valore del dato
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    display: false // Nascondi la legenda
+                }
+            }    
+        }
+    });
+    // Aggiorna il numero di gol nell'HTML
+    document.getElementById('numeroGol').textContent = statisticheGiocatore.golSegnati;
+
+    //PROVA RADAR CHART
+    var giocatore1 = {
+        nome: "Giocatore 1",
+        attacco: 80,
+        difesa: 60,
+        controllo: 75,
+        dribbling: 90,
+        velocita: 70
+    };
+    var colors = {
+        attacco: 'red',
+        difesa: 'green',
+        controllo: 'yellow',
+        dribbling: 'blue',
+        velocita: 'purple'
+    };
+
+    var ctx1 = document.getElementById('radarChart').getContext('2d');
+
+    var data = {
+        labels: ['Attacco', 'Difesa', 'Controllo', 'Dribbling', 'Velocità'],
+        datasets: []
+    };
+    giocatori = [giocatore1]
+    // Aggiungi un dataset per ogni giocatore
+    giocatori.forEach(function(giocatore) {
+        data.datasets.push({
+            label: giocatore.nome,
+            data: [giocatore.attacco, giocatore.difesa, giocatore.controllo, giocatore.dribbling, giocatore.velocita],
+            backgroundColor: colors[giocatore.nome.toLowerCase()],
+            borderColor: colors[giocatore.nome.toLowerCase()],
+            borderWidth: 2,
+            fill: true, // Per riempire l'area sotto il grafico
+            pointBackgroundColor: colors[giocatore.nome.toLowerCase()]
+        });
+    });
+
+    var radarChart = new Chart(ctx1, {
+        type: 'radar',
+        data: data,
+        options: {
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100 // Imposta il valore massimo per la scala radar
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Imposta la legenda su false per rimuoverla
+                }
+            }    
+            
+        }
+    });
+
+    
+    
+</script>
+
+
+{% endblock %}

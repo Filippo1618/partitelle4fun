@@ -18,25 +18,26 @@
   <div class="container m-5">
     <div class="row">
 
-      {% for message in messages %}
-      <div class="alert alert-primary alet-dismissible fade show" role="alert">
-        <strong>Message: </strong>{{message}}
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div
+          class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
       </div>
-
-      <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endfor %}
+      {% endif %}
       
       <div class="col-md-8">
         <form action="{% url 'login_req' %}" method="post">
